@@ -1,0 +1,24 @@
+{
+  "name": "wayfarer",
+  "version": "1.0.0",
+  "description": "WayFarer is a public bus transportation booking server.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dieudonneAwa/WayFarer.git"
+  },
+  "author": "Awa Dieudonne Mbuh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dieudonneAwa/WayFarer/issues"
+  },
+  "homepage": "https://github.com/dieudonneAwa/WayFarer#readme",
+  "devDependencies": {
+    "eslint": "6.0.1",
+    "eslint-config-airbnb-base": "13.1.0",
+    "eslint-plugin-import": "2.18.0"
+  }
+}

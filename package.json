@@ -4,7 +4,9 @@
   "description": "WayFarer is a public bus transportation booking server.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon --exec babel-node src/server.js",
+    "test": "mocha --require babel-register ./test/*.test.js --exit || true",
+    "babel": "babel --presets es2015 src/server.js -o lib/server.js"
   },
   "repository": {
     "type": "git",
@@ -17,8 +19,17 @@
   },
   "homepage": "https://github.com/dieudonneAwa/WayFarer#readme",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "chai": "^4.2.0",
     "eslint": "6.0.1",
     "eslint-config-airbnb-base": "13.1.0",
-    "eslint-plugin-import": "2.18.0"
+    "eslint-plugin-import": "2.18.0",
+    "mocha": "^6.1.4"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
   }
 }

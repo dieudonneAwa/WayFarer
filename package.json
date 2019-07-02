@@ -30,6 +30,8 @@
     "mocha": "^6.1.4"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "chai-http": "^4.3.0",
+    "express": "^4.17.1",
+    "uuid": "^3.3.2"
   }
 }

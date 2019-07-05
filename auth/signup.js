@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import User from '../models/signupModel';
+import User from '../models/userModel';
 
 async function loginById(userId) {
   const user = await User.findById(userId);
@@ -31,4 +31,5 @@ export default {
       console.log(error);
     }
   },
+
 };

@@ -27,6 +27,34 @@ export default class User {
     }
   }
 
+  static async find(query = {}) {
+    let paramsString = '';
+    let queryString = '';
+    const params = [];
+
+    if (Object.keys(query).length > 0) {
+      // Build query string from parameters
+      Object.keys(query).map((key, index) => {
+        index += 1;
+        const extendQuery = index === 1 ? '' : ' AND';
+        paramsString += `${extendQuery} ${key}=$${index}`;
+        params.push(query[key]);
+        return key;
+      });
+
+      queryString = `SELECT * FROM users WHERE ${paramsString}`;
+    } else {
+      queryString = 'SELECT * FROM users';
+    }
+
+    try {
+      const { rows } = await db.query(queryString, params);
+      return rows;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   static async findById(userId) {
     try {
       const { rows } = await db.query('SELECT * FROM users WHERE id=$1 LIMIT 1', [userId]);

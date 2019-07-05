@@ -29,4 +29,12 @@ export default {
       throw error;
     }
   },
+
+  async getAllTrips(req, res) {
+    const allTrips = await Trip.findAll({});
+    if (!allTrips.length) {
+      return res.status(200).send({ data: [], message: 'No Trips yet' });
+    }
+    return res.status(200).json({ status: 'Success', data: allTrips });
+  },
 };

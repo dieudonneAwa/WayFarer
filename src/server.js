@@ -15,6 +15,7 @@ app.get('/', (req, res) => res.send({ message: 'Welcome to my API' }));
 app.post('/auth/signup', Signup.signUp);
 app.post('/auth/signin', Signin.login);
 app.post('/trips', Trip.createTrip);
+app.get('/trips', Trip.getAllTrips);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Server running on port ${port}...`));

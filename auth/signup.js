@@ -13,7 +13,9 @@ async function loginById(userId) {
     email: user.email,
     is_admin: user.is_admin,
   };
-  jwt.sign(loginUser, process.env.JWT_SECRET, token => token);
+  const token = jwt.sign(loginUser, 'process.env.JWT_SECRET', '');
+  loginUser.token = token;
+  return loginUser;
 }
 
 export default {
@@ -24,7 +26,7 @@ export default {
       const newUser = await user.save();
 
       const token = await loginById(newUser.id);
-      return res.status(200).json({ data: token, message: 'Signup successful' });
+      return res.status(200).json({ status: 'Success', data: token });
     } catch (error) {
       console.log(error);
     }

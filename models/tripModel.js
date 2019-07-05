@@ -35,4 +35,32 @@ export default class Trip {
       throw error;
     }
   }
+
+  static async findAll(query = {}) {
+    let paramsString = '';
+    let queryString = '';
+    const params = [];
+
+    if (Object.keys(query).length > 0) {
+      // Build query string from parameters
+      Object.keys(query).map((key, index) => {
+        index += 1;
+        const extendQuery = index === 1 ? '' : ' AND';
+        paramsString += `${extendQuery} ${key}=$${index}`;
+        params.push(query[key]);
+        return key;
+      });
+
+      queryString = `SELECT * FROM trips WHERE ${paramsString}`;
+    } else {
+      queryString = 'SELECT * FROM trips';
+    }
+
+    try {
+      const { rows } = await db.query(queryString, params);
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+  }
 }

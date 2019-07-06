@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import Signup from '../auth/signup';
 import Signin from '../auth/signin';
 import Trip from '../controllers/trips';
+import Booking from '../controllers/bookings';
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.post('/auth/signup', Signup.signUp);
 app.post('/auth/signin', Signin.login);
 app.post('/trips', Trip.createTrip);
 app.get('/trips', Trip.getAllTrips);
+app.post('/bookings', Booking.createBooking);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Server running on port ${port}...`));

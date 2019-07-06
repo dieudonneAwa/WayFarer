@@ -1,67 +1,25 @@
-import uuid from 'uuid';
+import db from '../db';
 
-class Booking {
-  /**
-   * class constructor
-   * @param data
-   */
-  constructor() {
-    this.bookings = [];
+export default class Booking {
+  constructor(booking) {
+    if (booking && booking.id) {
+      this.id = booking.id;
+    }
+    this.trip_id = booking && booking.trip_id ? booking.trip_id : null;
+    this.user_id = booking && booking.user_id ? booking.user_id : null;
+    this.created_on = booking && booking.created_on ? booking.created_on : null;
   }
-  /**
-   * @param {object} booking object
-   */
-  book(data) {
-    const newBooking = {
-      id: uuid.v4(),
-      trip_id: data.trip_id,
-      user_id: data.user_id,
-      created_on: data.created_on,
-    };
-    this.bookings.push(newBooking);
-    return newBooking;
-  }
-  /**
-   * @param {uuid} id
-   * @param {object} booking object
-   */
-  getBooking(id) {
-    return this.bookings.find(booking => booking.id === id); 
-  }
-  /**
-   * @param {object} return all bookings
-   */
-  getBookings() {
-    return this.bookings;
-  }
-  /**
-   * @param {uuid} id
-   * @param {object} data
-   */
-  updateBooking(id, data) {
-    this.bookings.forEach((booking, index) => {
-      if (booking.id === id) {
-        this.bookings[index] = {
-          id: booking.id,
-          trip_id: data.trip_id || booking.trip_id,
-          user_id: data.user_id || booking.user_id,
-          created_on: data.created_on || booking.created_on,
-        };
-      }
-    });
-    return this.bookings.find(booking => booking.id === id);
-  }
-  /**
-   * @param id
-   */
-  cancelBooking(id) {
-    this.bookings.forEach((booking) => {
-      if (booking.id === id) {
-        this.bookings.splice(id, 1);
-      }
-      return {};
-    });
+
+  async save() {
+    const params = [this.created_on];
+    try {
+      const { rows } = await db.query(`INSERT INTO bookings 
+      (trip_id, user_id, created_on)
+      VALUES ((SELECT id FROM trips), (SELECT id FROM users), $1) RETURNING *`, params);
+      const newBooking = new Booking(rows[0]);
+      return newBooking;
+    } catch (error) {
+      throw error;
+    }
   }
 }
-
-export default new Booking();

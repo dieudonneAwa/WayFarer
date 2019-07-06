@@ -8,6 +8,12 @@ const createTokenById = async (booking) => {
     id: booking.id,
     trip_id: booking.trip_id,
     user_id: booking.user_id,
+    bus_id: booking.bus_id,
+    trip_date: booking.trip_date,
+    seat_number: booking.trip_date,
+    first_name: booking.first_name,
+    last_name: booking.last_name,
+    email: booking.email,
     created_on: booking.created_on,
   };
   const token = jwt.sign(newBooking, 'process.env.JWT_SECRET', '');
@@ -25,5 +31,13 @@ export default {
     } catch (error) {
       throw error;
     }
+  },
+
+  async getAllBookings(req, res) {
+    const allBookings = await Booking.adminFindAll({});
+    if (!allBookings.length) {
+      return res.status(200).send({ status: 'No bookings yet', data: [] });
+    }
+    return res.status(200).json({ status: 'Success', data: allBookings });
   },
 };

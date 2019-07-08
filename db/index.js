@@ -8,7 +8,11 @@ const pool = new Pool({
 
 export default {
   async query(text, params) {
-    const res = await pool.query(text, params);
-    return res;
+    try {
+      const res = await pool.query(text, params);
+      return res;
+    } catch (error) {
+      throw error;
+    }
   },
 };

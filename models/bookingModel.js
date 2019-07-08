@@ -11,12 +11,13 @@ export default class Booking {
     this.created_on = booking && booking.created_on ? booking.created_on : null;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   async save() {
-    const params = [this.trip_id, this.user_id, this.bus_id];
+    // const params = [this.trip_id, this.user_id, this.bus_id];
     try {
       const { rows } = await db.query(`INSERT INTO bookings 
-                          (trip_id, user_id, bus_id, created_on)
-                          VALUES ($1, $2, $3, Now()) RETURNING *`, params);
+                          (created_on)
+                          VALUES (Now()) RETURNING *`);
       const newBooking = new Booking(rows[0]);
       return newBooking;
     } catch (error) {
@@ -31,6 +32,15 @@ export default class Booking {
       return rows;
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  static async delete(bookingId) {
+    try {
+      const result = await db.query('DELETE FROM bookings WHERE id=$1', [bookingId]);
+      return result;
+    } catch (error) {
+      throw error;
     }
   }
 }

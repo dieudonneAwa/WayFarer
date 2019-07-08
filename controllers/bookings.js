@@ -39,4 +39,19 @@ export default {
     }
     return res.status(200).json({ status: 'Success', data: allBookings });
   },
+
+  async deleteBooking(req, res) {
+    const bookingId = parseInt(req.params.bookingId, 10);
+
+    if (!bookingId || Number.isNaN(bookingId)) {
+      return res.status(400).send({ status: 'error', error: 'Invalid booking id' });
+    }
+
+    try {
+      const emptyBooking = await Booking.delete(bookingId);
+      return res.status(204).json({ status: 'Success', data: emptyBooking });
+    } catch (error) {
+      throw error;
+    }
+  },
 };

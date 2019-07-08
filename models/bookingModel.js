@@ -11,18 +11,13 @@ export default class Booking {
     this.created_on = booking && booking.created_on ? booking.created_on : null;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   async save() {
-    const params = [this.created_on];
+    // const params = [this.trip_id, this.user_id, this.bus_id];
     try {
       const { rows } = await db.query(`INSERT INTO bookings 
-                          (trip_id, user_id, bus_id, trip_date, first_name, last_name, email, created_on)
-                          VALUES ((SELECT id FROM trips), 
-                          (SELECT id FROM users), 
-                          (SELECT id FROM buses), 
-                          (SELECT trip_date FROM trips),
-                          (SELECT first_name FROM users WHERE id = (SELECT id FROM users)),
-                          (SELECT last_name FROM users WHERE id = (SELECT id FROM users)),
-                          (SELECT email FROM users WHERE id = (SELECT id FROM users)), $1) RETURNING *`, params);
+                          (created_on)
+                          VALUES (Now()) RETURNING *`);
       const newBooking = new Booking(rows[0]);
       return newBooking;
     } catch (error) {
@@ -30,31 +25,22 @@ export default class Booking {
     }
   }
 
-  static async adminFindAll(query = {}) {
-    let paramsString = '';
-    let queryString = '';
-    const params = [];
-
-    if (Object.keys(query).length > 0) {
-      // Build query string from parameters
-      Object.keys(query).map((key, index) => {
-        index += 1;
-        const extendQuery = index === 1 ? '' : ' AND';
-        paramsString += `${extendQuery} ${key}=$${index}`;
-        params.push(query[key]);
-        return key;
-      });
-
-      queryString = `SELECT * FROM bookings WHERE ${paramsString}`;
-    } else {
-      queryString = 'SELECT * FROM bookings WHERE user_id = (SELECT id FROM users WHERE is_admin = true)';
-    }
-
+  static async adminFindAll() {
     try {
-      const { rows } = await db.query(queryString, params);
+      const queryString = 'SELECT * FROM bookings';
+      const { rows } = await db.query(queryString);
       return rows;
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  static async delete(bookingId) {
+    try {
+      const result = await db.query('DELETE FROM bookings WHERE id=$1', [bookingId]);
+      return result;
+    } catch (error) {
+      throw error;
     }
   }
 }

@@ -2,8 +2,6 @@ import jwt from 'jsonwebtoken';
 import Booking from '../models/bookingModel';
 
 const createTokenById = async (booking) => {
-  // const booking = await Booking.findById(bookingId);
-
   const newBooking = {
     id: booking.id,
     trip_id: booking.trip_id,
@@ -16,6 +14,7 @@ const createTokenById = async (booking) => {
     email: booking.email,
     created_on: booking.created_on,
   };
+
   const token = jwt.sign(newBooking, 'process.env.JWT_SECRET', '');
   return token;
 };
@@ -34,10 +33,25 @@ export default {
   },
 
   async getAllBookings(req, res) {
-    const allBookings = await Booking.adminFindAll({});
+    const allBookings = await Booking.adminFindAll();
     if (!allBookings.length) {
       return res.status(200).send({ status: 'No bookings yet', data: [] });
     }
     return res.status(200).json({ status: 'Success', data: allBookings });
+  },
+
+  async deleteBooking(req, res) {
+    const bookingId = parseInt(req.params.bookingId, 10);
+
+    if (!bookingId || Number.isNaN(bookingId)) {
+      return res.status(400).send({ status: 'error', error: 'Invalid booking id' });
+    }
+
+    try {
+      const emptyBooking = await Booking.delete(bookingId);
+      return res.status(204).json({ status: 'Success', data: emptyBooking });
+    } catch (error) {
+      throw error;
+    }
   },
 };

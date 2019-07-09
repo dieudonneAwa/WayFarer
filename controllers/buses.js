@@ -26,4 +26,16 @@ export default {
       throw error;
     }
   },
+
+  async getAllBuses(req, res) {
+    try {
+      const allBuses = await Bus.findAll();
+      if (!allBuses.length) {
+        return res.status(200).send({ status: 'No buses yet', data: [] });
+      }
+      return res.status(200).json({ status: 'Success', data: allBuses });
+    } catch (error) {
+      throw error;
+    }
+  },
 };

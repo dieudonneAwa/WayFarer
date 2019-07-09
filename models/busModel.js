@@ -25,4 +25,14 @@ export default class Bus {
       throw error;
     }
   }
+
+  static async findAll() {
+    try {
+      const queryString = 'SELECT * FROM buses';
+      const { rows } = await db.query(queryString);
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+  }
 }

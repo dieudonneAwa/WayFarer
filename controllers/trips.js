@@ -24,7 +24,7 @@ export default {
       const trip = new Trip(req.body);
       const newTrip = await trip.save();
 
-      return res.status(201).json({ status: 'Success', data: newTrip })
+      return res.status(201).json({ status: 'Success', data: newTrip });
     } catch (error) {
       throw error;
     }
@@ -36,5 +36,25 @@ export default {
       return res.status(200).send({ data: [], message: 'No Trips yet' });
     }
     return res.status(200).json({ status: 'Success', data: allTrips });
+  },
+
+  async updateTrip(req, res) {
+    const tripId = parseInt(req.params.tripId, 10);
+
+    if (!tripId || Number.isNaN(tripId)) {
+      return res.status(400).send({ errors: { tripId: 'A valid trip Id is required' } });
+    }
+
+    const trip = await Trip.findById(tripId);
+    if (!trip) {
+      return res.status(200).send({ status: 'Error', data: 'Trip not found' });
+    }
+
+    try {
+      const updatedTrip = await trip.update();
+      return res.status(200).json({ data: updatedTrip, message: 'Trip updated' });
+    } catch (error) {
+      throw error;
+    }
   },
 };

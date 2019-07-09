@@ -63,4 +63,21 @@ export default class Trip {
       throw error;
     }
   }
+
+  async update() {
+    const params = [this.origin, this.destination, this.trip_date, this.fare, this.status, this.id];
+    try {
+      const { rows } = await db.query(`UPDATE trips SET 
+                          origin=$1,
+                          destination=$2,
+                          trip_date=$3,
+                          fare=$4,
+                          status=$5 
+                      WHERE id=$6 RETURNING *`, params);
+      const trip = new Trip(rows[0]);
+      return trip;
+    } catch (error) {
+      return error;
+    }
+  }
 }

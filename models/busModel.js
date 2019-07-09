@@ -1,71 +1,28 @@
-import uuid from 'uuid';
+import db from '../db';
 
-class Bus {
-  /**
-   * class constructor
-   * @param data
-   */
-  constructor() {
-    this.buses = [];
-  }
-  /**
-   * @param {object} bus object
-   */
-  createBus(data) {
-    const newBus = {
-      id: uuid.v4(),
-      number_plate: data.number_plate,
-      manufacturer: data.manufacturer,
-      model: data.model,
-      year: data.year,
-      capacity: data.capacity,
+export default class Bus {
+  constructor(bus) {
+    if (bus && bus.id) {
+      this.id = bus.id;
     }
-    this.buses.push(newBus);
-    return newBus;
+    this.number_plate = bus && bus.number_plate ? bus.number_plate : null;
+    this.manufacturer = bus && bus.manufacturer ? bus.manufacturer : null;
+    this.model = bus && bus.model ? bus.model : null;
+    this.year = bus && bus.year ? bus.year : null;
+    this.capacity = bus && bus.capacity ? bus.capacity : null;
   }
-  /**
-   * @param {uuid} id
-   * @param {object} bus object
-   */
-  getBus(id) {
-    return this.buses.find(bus => bus.id === id); 
-  }
-  /**
-   * @param {object} return all buses
-   */
-  getBuses() {
-    return this.buses;
-  }
-  /**
-   * @param {uuid} id
-   * @param {object} data
-   */
-  updateBuse(id, data) {
-    this.buses.forEach((bus, index) => {
-      if (bus.id === id) {
-        this.buses[index] = {
-          id: bus.id,
-          number_plate: data.number_plate || bus.number_plate,
-          manufacturer: data.manufacturer || bus.manufacturer,
-          model: data.model || bus.model,
-          year: data.year || bus.year,
-          capacity: data.capacity || capacity,
-        };
-      }
-    });
-    return this.buses.find(bus => bus.id === id);
-  }
-  /**
-   * @param id
-   */
-  deleteBus(id) {
-    this.buses.forEach((bus) => {
-      if (bus.id === id) {
-        this.buses.splice(id, 1);
-      }
-      return {};
-    });
+
+  async save() {
+    const params = [this.number_plate, this.manufacturer, this.model, this.year, this.capacity];
+    try {
+      const { rows } = await db.query(`INSERT INTO buses 
+            (number_plate, manufacturer, model, year, capacity)
+      VALUES 
+            ($1, $2, $3, $4, $5) RETURNING *`, params);
+      const newBus = new Bus(rows[0]);
+      return newBus;
+    } catch (error) {
+      throw error;
+    }
   }
 }
-
-export default new Bus();

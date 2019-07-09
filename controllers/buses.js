@@ -39,6 +39,16 @@ export default {
     }
   },
 
+  async getOneBus(req, res) {
+    const busId = parseInt(req.params.busId, 10);
+    try {
+      const oneBus = await Bus.findById(busId);
+      return res.status(200).json({ status: 'Success', data: oneBus });
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async updatebus(req, res) {
     const { busId } = req.params;
     if (busId == null) {

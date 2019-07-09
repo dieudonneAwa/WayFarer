@@ -39,23 +39,25 @@ export default {
   },
 
   async updateTrip(req, res) {
-    const tripId = parseInt(req.params.tripId, 10);
-
-    if (!tripId || Number.isNaN(tripId)) {
-      return res.status(400).send({ errors: { tripId: 'A valid trip Id is required' } });
+    const { tripId } = req.params;
+    if (tripId == null) {
+      res.status(400).send({ status: 'error', errors: 'A valid trip Id is required' });
     }
 
     const trip = await Trip.findById(tripId);
-    if (!tripId || Number.isNaN(tripId)) {
-      return res.status(400).send({ status: 'error', error: 'A valid trip Id is required' });
+    if (!trip.id) {
+      res.status(200).send({ status: 'error', errors: 'trip not found' });
     }
 
-    try {
-      const updatedTrip = await trip.update();
-      return res.status(200).json({ data: updatedTrip, message: 'Trip updated' });
-    } catch (error) {
-      throw error;
-    }
+    trip.bus_id = req.body.bus_id;
+    trip.origin = req.body.origin;
+    trip.destination = req.body.destination;
+    trip.trip_date = req.body.trip_date;
+    trip.fare = req.body.fare;
+    trip.status = req.body.status;
+    const updatedTrip = await trip.update();
+
+    res.status(200).json({ data: updatedTrip, message: 'Trip updated successfully' });
   },
 
   async deleteTrip(req, res) {

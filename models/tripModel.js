@@ -80,4 +80,13 @@ export default class Trip {
       return error;
     }
   }
+
+  static async delete(tripId) {
+    try {
+      const result = await db.query('DELETE FROM trips WHERE id = $1', [tripId]);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
 }

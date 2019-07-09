@@ -17,10 +17,11 @@ app.post('/auth/signup', Signup.signUp);
 app.post('/auth/signin', Signin.login);
 app.post('/trips', Trip.createTrip);
 app.get('/trips', Trip.getAllTrips);
+app.patch('/trips/:tripId', Trip.updateTrip);
+app.delete('/trips/:tripId', Trip.deleteTrip);
 app.post('/bookings', Booking.createBooking);
 app.get('/bookings', Booking.getAllBookings);
 app.delete('/bookings/:bookingId', Booking.deleteBooking);
-app.patch('/trips/:tripId', Trip.updateTrip);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Server running on port ${port}...`));

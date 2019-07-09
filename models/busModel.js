@@ -35,4 +35,30 @@ export default class Bus {
       throw error;
     }
   }
+
+  static async findById(busId) {
+    try {
+      const { rows } = await db.query('SELECT * FROM buses WHERE id=$1 LIMIT 1', [busId]);
+      return rows.length ? new Bus(rows[0]) : false;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async update() {
+    const params = [this.number_plate, this.manufacturer, this.model, this.year, this.capacity, this.id];
+    try {
+      const { rows } = await db.query(`UPDATE buses SET 
+                          number_plate=$1,
+                          manufacturer=$2,
+                          model=$3,
+                          year=$4,
+                          capacity=$5 
+                      WHERE id=$6 RETURNING *`, params);
+      const bus = new Bus(rows[0]);
+      return bus;
+    } catch (error) {
+      return error;
+    }
+  }
 }

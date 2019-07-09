@@ -25,6 +25,15 @@ export default class Booking {
     }
   }
 
+  static async findById(bookingId) {
+    try {
+      const { rows } = await db.query('SELECT * FROM bookings WHERE id=$1 LIMIT 1', [bookingId]);
+      return rows.length ? new Booking(rows[0]) : false;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   static async adminFindAll() {
     try {
       const queryString = 'SELECT * FROM bookings';
@@ -32,6 +41,18 @@ export default class Booking {
       return rows;
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  async update() {
+    const params = [this.trip_id, this.user_id, this.bus_id, this.created_on, this.id];
+    try {
+      const { rows } = await db.query(`UPDATE bookings SET trip_id=$1, user_id=$2, bus_id=$3, created_on=$4
+                      WHERE id=$5 RETURNING *`, params);
+      const booking = new Booking(rows[0]);
+      return booking;
+    } catch (error) {
+      return error;
     }
   }
 

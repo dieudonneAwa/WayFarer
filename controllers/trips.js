@@ -46,8 +46,8 @@ export default {
     }
 
     const trip = await Trip.findById(tripId);
-    if (!trip) {
-      return res.status(200).send({ status: 'Error', data: 'Trip not found' });
+    if (!tripId || Number.isNaN(tripId)) {
+      return res.status(400).send({ status: 'error', error: 'A valid trip Id is required' });
     }
 
     try {
@@ -57,4 +57,19 @@ export default {
       throw error;
     }
   },
+
+  async deleteTrip(req, res) {
+    const tripId = parseInt(req.params.tripId, 10);
+
+    if (!tripId || Number.isNaN(tripId)) {
+      return res.status(400).send({ status: 'error', error: 'A valid trip Id is required' });
+    }
+
+    try {
+      await Trip.delete(tripId);
+      return res.status(200).json({ status: 'Trip deleted!', data: [] });
+    } catch (error) {
+      throw error;
+    }
+  }
 };

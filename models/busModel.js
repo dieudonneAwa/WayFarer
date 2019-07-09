@@ -61,4 +61,13 @@ export default class Bus {
       return error;
     }
   }
+
+  static async delete(busId) {
+    try {
+      const result = await db.query('DELETE FROM buses WHERE id = $1', [busId]);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
 }

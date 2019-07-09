@@ -14,19 +14,28 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({ type: 'application/json' }));
 
 app.get('/', (req, res) => res.send({ message: 'Welcome to my API' }));
+
+// authentications routes
 app.post('/auth/signup', Signup.signUp);
 app.post('/auth/signin', Signin.login);
+
+// trips routes
 app.post('/trips', Trip.createTrip);
 app.get('/trips', Trip.getAllTrips);
 app.patch('/trips/:tripId', Trip.updateTrip);
 app.delete('/trips/:tripId', Trip.deleteTrip);
+
+// bookings routes
 app.post('/bookings', Booking.createBooking);
 app.get('/bookings', Booking.getAllBookings);
 app.delete('/bookings/:bookingId', Booking.deleteBooking);
+
+// buses routes
 app.post('/buses', Bus.addBus);
 app.get('/buses', Bus.getAllBuses);
 app.get('/buses/:busId', Bus.getOneBus);
 app.patch('/buses/:busId', Bus.updatebus);
+app.delete('/buses/:busId', Bus.deleteBus);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Server running on port ${port}...`));

@@ -38,4 +38,25 @@ export default {
       throw error;
     }
   },
+
+  async updatebus(req, res) {
+    const { busId } = req.params;
+    if (busId == null) {
+      res.status(400).send({ status: 'error', errors: 'A valid bus Id is required' });
+    }
+
+    const bus = await Bus.findById(busId);
+    if (!bus.id) {
+      res.status(200).send({ status: 'error', errors: 'bus not found' });
+    }
+
+    bus.number_plate = req.body.number_plate;
+    bus.manufacturer = req.body.manufacturer;
+    bus.model = req.body.model;
+    bus.year = req.body.year;
+    bus.capacity = req.body.capacity;
+    const updatedBus = await bus.update();
+
+    res.status(200).json({ data: updatedBus, message: 'Bus updated successfully' });
+  },
 };

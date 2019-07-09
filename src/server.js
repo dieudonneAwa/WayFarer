@@ -25,6 +25,7 @@ app.get('/bookings', Booking.getAllBookings);
 app.delete('/bookings/:bookingId', Booking.deleteBooking);
 app.post('/buses', Bus.addBus);
 app.get('/buses', Bus.getAllBuses);
+app.patch('/buses/:busId', Bus.updatebus);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Server running on port ${port}...`));

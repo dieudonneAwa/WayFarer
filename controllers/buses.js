@@ -69,4 +69,19 @@ export default {
 
     res.status(200).json({ data: updatedBus, message: 'Bus updated successfully' });
   },
+
+  async deleteBus(req, res) {
+    const busId = parseInt(req.params.busId, 10);
+
+    if (!busId || Number.isNaN(busId)) {
+      return res.status(400).send({ status: 'error', error: 'A valid bus Id is required' });
+    }
+
+    try {
+      await Bus.delete(busId);
+      return res.status(200).json({ status: 'Bus deleted!', data: [] });
+    } catch (error) {
+      throw error;
+    }
+  },
 };

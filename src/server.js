@@ -29,6 +29,7 @@ app.delete('/trips/:tripId', Trip.deleteTrip);
 // bookings routes
 app.post('/bookings', Booking.createBooking);
 app.get('/bookings', Booking.getAllBookings);
+app.get('/bookings/:bookingId', Booking.getOneBooking);
 app.patch('/bookings/:bookingId', Booking.updateBooking);
 app.delete('/bookings/:bookingId', Booking.deleteBooking);
 

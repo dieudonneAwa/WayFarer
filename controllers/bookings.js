@@ -40,6 +40,16 @@ export default {
     return res.status(200).json({ status: 'Success', data: allBookings });
   },
 
+  async getOneBooking(req, res) {
+    const bookingId = parseInt(req.params.bookingId, 10);
+    try {
+      const oneBooking = await Booking.findById(bookingId);
+      return res.status(200).json({ status: 'Success', data: oneBooking });
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async updateBooking(req, res) {
     const { bookingId } = req.params;
     if (bookingId == null) {

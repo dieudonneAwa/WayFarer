@@ -1,6 +1,9 @@
 # WayFarer
 WayFarer is a public bus transportation booking server.
 
+[![Build Status](https://travis-ci.org/dieudonneAwa/WayFarer.svg?branch=develop)](https://travis-ci.org/dieudonneAwa/WayFarer)
+[![Coverage Status](https://coveralls.io/repos/github/dieudonneAwa/WayFarer/badge.svg?branch=develop)](https://coveralls.io/github/dieudonneAwa/WayFarer?branch=develop)
+
 ## WayFarer API
 
 ### Required features

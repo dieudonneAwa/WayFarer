@@ -38,6 +38,16 @@ export default {
     return res.status(200).json({ status: 'Success', data: allTrips });
   },
 
+  async getOneTrip(req, res) {
+    const tripId = parseInt(req.params.tripId, 10);
+    try {
+      const oneTrip = await Trip.findById(tripId);
+      return res.status(200).json({ status: 'Success', data: oneTrip });
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async updateTrip(req, res) {
     const { tripId } = req.params;
     if (tripId == null) {

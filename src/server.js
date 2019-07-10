@@ -22,6 +22,7 @@ app.post('/auth/signin', Signin.login);
 // trips routes
 app.post('/trips', Trip.createTrip);
 app.get('/trips', Trip.getAllTrips);
+app.get('/trips/:tripId', Trip.getOneTrip);
 app.patch('/trips/:tripId', Trip.updateTrip);
 app.delete('/trips/:tripId', Trip.deleteTrip);
 

@@ -23,6 +23,11 @@ bookings.
 6. Admin can delete a bus.
 7. Admin can update a bus.
 
+### Optional features
+1. Users can get a list of filtered trips based on origin.
+2. Users can get a list of filtered trips based on destination.
+3. Users can specify their seat numbers when making a booking.
+
 
 ## API Endpoints
 

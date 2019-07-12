@@ -1,27 +1,26 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import uuid from 'uuid';
 import app from '../src/server';
-import Trip from '../models/tripModel';
+import Trip from '../api/v1/models/tripModel';
 
 // eslint-disable-next-line no-unused-vars
 const should = chai.should();
 chai.use(chaiHttp);
 
 describe('Trips', () => {
-  it('POST /trips/: Should create a new trip.', (done) => {
-    const trip = {
-      id: uuid.v4(),
-      bus_id: 1,
-      origin: 'Lagos',
-      destination: 'Abuja',
-      trip_date: '21/6/19',
-      fare: 'N500',
-      status: 1.00,
-    };
+  const trip = {
+    id: 2,
+    bus_id: 1,
+    origin: 'Lagos',
+    destination: 'Abuja',
+    trip_date: 'NOW()',
+    fare: 5000.0,
+    status: 1.00,
+  };
+  it('POST /api/v1/trips/: Should create a new trip.', (done) => {
     chai
       .request(app)
-      .post('/trips')
+      .post('/api/v1/trips')
       .send(trip)
       .end((err, res) => {
         res.should.have.status(201);
@@ -30,31 +29,10 @@ describe('Trips', () => {
       });
   });
 
-  it('GET /trips Should get all trips.', (done) => {
+  it('GET /api/v1/trips Should get all trips.', (done) => {
     chai
       .request(app)
-      .get('/trips')
-      .end((err, res) => {
-        res.should.have.status(200);
-        res.body.should.be.a('array');
-        done();
-      });
-  });
-
-  it('GET /trips/:id Should get a particular trip', (done) => {
-    const trip = {
-      id: uuid.v4(),
-      bus_id: 1,
-      origin: 'Lagos',
-      destination: 'Abuja',
-      trip_date: '21/6/19',
-      fare: 'N500',
-      status: 1.00,
-    };
-    const tripId = Trip.createTrip(trip).id;
-    chai
-      .request(app)
-      .get(`/trips/${tripId}`)
+      .get('/api/v1/trips')
       .end((err, res) => {
         res.should.have.status(200);
         res.body.should.be.a('object');
@@ -62,27 +40,27 @@ describe('Trips', () => {
       });
   });
 
-  it('PATCH /trips/:id Should update a trip object', (done) => {
-    const trip = {
-      id: uuid.v4(),
-      bus_id: 1,
-      origin: 'Lagos',
-      destination: 'Abuja',
-      trip_date: '21/6/19',
-      fare: 'N500',
-      status: 1.00,
-    };
-    const tripId = Trip.createTrip(trip).id;
+  it('GET /api/v1/trips/:tripId Should get a particular trip', (done) => {
     chai
       .request(app)
-      .patch(`/trips/${tripId}`)
+      .get(`/api/v1/trips/${trip.id}`)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.be.a('object');
+        done();
+      });
+  });
+
+  it('PATCH /api/v1/trips/:tripId Should update a trip object', (done) => {
+    chai
+      .request(app)
+      .patch(`/api/v1/trips/${trip.id}`)
       .send({
-        id: uuid.v4(),
         bus_id: 1,
         origin: 'Yola',
         destination: 'Abuja',
-        trip_date: '21/6/19',
-        fare: 'N5000',
+        trip_date: 'now()',
+        fare: 5000.0,
         status: 1.00,
       })
       .end((err, res) => {
@@ -92,23 +70,15 @@ describe('Trips', () => {
       });
   });
 
-  it('DELETE /trips/:id Should delete a trip object', (done) => {
-    const trip = {
-      id: uuid.v4(),
-      bus_id: 1,
-      origin: 'Lagos',
-      destination: 'Abuja',
-      trip_date: '21/6/19',
-      fare: 'N500',
-      status: 1.00,
-    };
-    const tripId = Trip.createTrip(trip).id;
+  it('DELETE /api/v1/trips/:id Should delete a trip object', (done) => {
+    Trip.delete(trip.id);
     chai
       .request(app)
-      .delete(`/trips/${tripId}`)
+      .delete(`/api/v1/trips/${trip.id}`)
       .end((err, res) => {
-        res.should.have.status(204);
+        res.should.have.status(200);
         res.body.should.be.a('object');
+        done();
       });
   });
 });

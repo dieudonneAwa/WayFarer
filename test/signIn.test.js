@@ -7,17 +7,17 @@ const should = chai.should();
 chai.use(chaiHttp);
 
 describe('Sign In', () => {
-  it('POST /auth/signin/: Should log a user in.', (done) => {
+  it('POST /api/v1/auth/signin/: Should log a user in.', (done) => {
     const user = {
-      email: 'awa@gmail.com',
+      email: 'm@gmail.com',
       password: '123',
     };
     chai
       .request(app)
-      .post('/auth/signin')
+      .post('/api/v1/auth/signin')
       .send(user)
       .end((err, res) => {
-        res.should.have.status(201);
+        res.should.have.status(200);
         res.body.should.be.a('object');
         done();
       });

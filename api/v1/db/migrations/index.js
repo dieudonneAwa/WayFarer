@@ -7,9 +7,9 @@ import bookings from './bookings';
 let connectionString = '';
 
 if (process.env.NODE_ENV === 'test') {
-  connectionString = 'postgresql://postgres:awa@localhost:5432/wayfarer_test';
+  connectionString = process.env.TEST_DATABASE_URL;
 } else {
-  connectionString = 'postgresql://postgres:awa@localhost:5432/wayfarer';
+  connectionString = process.env.DATABASE_URL;
 }
 
 const client = new Client({

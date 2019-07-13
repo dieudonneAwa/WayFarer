@@ -10,7 +10,8 @@
     "build": "npm run clean && babel api -d ./lib",
     "migrate:test": "cross-env NODE_ENV=test babel-node api/v1/db/migrations/index.js",
     "migrate": "node lib/v1/db/migrations/index.js",
-    "start": "node lib/server.js"
+    "start": "node lib/server.js",
+    "heroku-postbuild": "node lib/v1/db/migrations/index.js"
   },
   "repository": {
     "type": "git",

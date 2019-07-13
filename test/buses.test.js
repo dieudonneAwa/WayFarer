@@ -2,7 +2,7 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../src/server';
 import Bus from '../api/v1/models/busModel';
-import Booking from './../api/v1/models/bookingModel';
+import Trip from '../api/v1/models/tripModel';
 
 // eslint-disable-next-line no-unused-vars
 const should = chai.should();
@@ -10,7 +10,7 @@ chai.use(chaiHttp);
 
 describe('Buses ', () => {
   const bus = {
-    id: 1,
+    id: 2,
     number_plate: 'CM 785 SW',
     manufacturer: 'Ford',
     model: 'V8',
@@ -71,11 +71,12 @@ describe('Buses ', () => {
   });
 
   it('DELETE /api/v1/buses/:bus_id Should delete a bus object', (done) => {
-    Bus.delete(bus.id);
+    Trip.delete(1);
     chai
       .request(app)
       .delete(`/api/v1/buses/${bus.id}`)
       .end((err, res) => {
+        console.log(res.body);
         res.should.have.status(200);
         res.body.should.be.a('object');
         done();

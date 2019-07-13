@@ -11,4 +11,4 @@ services:
 before_script:
   - psql -c 'create database wayfarer_test;' -U postgres
 script:
-  - npm migrate-test
+  - "npm migrate-test"

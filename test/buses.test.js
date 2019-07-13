@@ -1,6 +1,6 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import app from '../src/server';
+import app from '../api/server';
 import Bus from '../api/v1/models/busModel';
 import Trip from '../api/v1/models/tripModel';
 

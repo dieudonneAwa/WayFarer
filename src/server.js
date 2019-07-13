@@ -1,6 +1,10 @@
 import express from 'express';
+import { config } from 'dotenv';
 import bodyParser from 'body-parser';
 import appRoutes from '../api/v1/routes';
+
+
+config();
 
 const app = express();
 

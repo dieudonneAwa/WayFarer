@@ -9,7 +9,7 @@
     "clean": "rm -rf lib && mkdir lib",
     "build": "npm run clean && babel api -d ./lib",
     "migrate:test": "cross-env NODE_ENV=test babel-node api/v1/db/migrations/index.js",
-    "migrate": "node lib/api/v1/db/migrations/index.js",
+    "migrate": "node lib/v1/db/migrations/index.js",
     "start": "node lib/server.js"
   },
   "repository": {

@@ -5,9 +5,9 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon --exec babel-node src/server.js",
-    "test": "cross-env NODE_ENV=test npm run migrate-test && mocha --require babel-register ./test/*.test.js --exit || true",
+    "test": "cross-env NODE_ENV=test npm run migrate && mocha --require babel-register ./test/*.test.js --exit || true",
     "babel": "babel --presets es2015 src/server.js -o lib/server.js",
-    "migrate-test": "cross-env NODE_ENV=test babel-node api/v1/db/migrations/index.js",
+    "migrate:test": "cross-env NODE_ENV=test babel-node api/v1/db/migrations/index.js",
     "migrate": "babel-node api/v1/db/migrations/index.js"
   },
   "repository": {

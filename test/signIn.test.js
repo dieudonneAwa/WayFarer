@@ -9,7 +9,7 @@ chai.use(chaiHttp);
 describe('Sign In', () => {
   it('POST /api/v1/auth/signin/: Should log a user in.', (done) => {
     const user = {
-      email: 'm@gmail.com',
+      email: 'l@gmail.com',
       password: '123',
     };
     chai

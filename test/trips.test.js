@@ -9,7 +9,7 @@ chai.use(chaiHttp);
 
 describe('Trips', () => {
   const trip = {
-    id: 2,
+    id: 1,
     bus_id: 1,
     origin: 'Lagos',
     destination: 'Abuja',
@@ -71,7 +71,7 @@ describe('Trips', () => {
   });
 
   it('DELETE /api/v1/trips/:id Should delete a trip object', (done) => {
-    Trip.delete(trip.id);
+    // Trip.delete(trip.id);
     chai
       .request(app)
       .delete(`/api/v1/trips/${trip.id}`)

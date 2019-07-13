@@ -31,6 +31,9 @@ const initTables = async () => {
     await client.query(trips.createTripsTable());
     await client.query(bookings.createBookingsTable());
 
+    // INITIALIZE BUSES TABLE
+    await buses.initBuses();
+
     await client.end();
     console.log('Tables created successfully');
   } catch (error) {

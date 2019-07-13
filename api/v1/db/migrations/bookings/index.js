@@ -5,7 +5,7 @@ export default {
   },
 
   createBookingsTable: () => {
-    const queryString = `CREATE TABLE bookings ( id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 ),
+    const queryString = `CREATE TABLE bookings ( id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY,
                                                 trip_id INTEGER,
                                                 user_id INTEGER,
                                                 bus_id INTEGER,

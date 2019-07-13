@@ -12,6 +12,7 @@ async function loginById(userId) {
     username: user.username,
     email: user.email,
     is_admin: user.is_admin,
+    exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 30),
   };
   const token = jwt.sign(loginUser, 'process.env.JWT_SECRET', '');
   loginUser.token = token;

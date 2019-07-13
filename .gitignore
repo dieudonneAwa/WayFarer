@@ -1,2 +1,4 @@
 node_modules
-lib/server.js
+lib
+.env
+.vscode

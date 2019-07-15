@@ -8,8 +8,9 @@
     "test": "npm run migrate:test && cross-env NODE_ENV=test nyc mocha --require babel-register ./test/*.test.js --exit || true",
     "clean": "rm -rf lib && mkdir lib",
     "build": "npm run clean && babel api -d ./lib",
-    "migrate:test": "cross-env NODE_ENV=test babel-node api/v1/db/migrations/index.js",
-    "migrate": "node lib/v1/db/migrations/index.js",
+    "migrate:test": "cross-env NODE_ENV=test && npm run migrate",
+    "migrate": "babel-node api/v1/db/migrations/index.js",
+    "migrate:prod": "node lib/v1/db/migrations/index.js",
     "start": "node lib/server.js",
     "heroku-postbuild": "npm run build && node lib/v1/db/migrations/index.js"
   },

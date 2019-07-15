@@ -77,7 +77,7 @@ bookings.
 
 ### create a trip
 
-URL: http://adc-wayfarer-andela.herokuapp.com/api/v1/trips
+URL: `http://adc-wayfarer-andela.herokuapp.com/api/v1/trips`
 
 Request Type: POST
 

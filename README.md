@@ -74,7 +74,9 @@ bookings.
 
 
 ## Examples - trips
+
 ### create a trip
+
 URL: http://adc-wayfarer-andela.herokuapp.com/api/v1/trips
 
 Request Type: POST
@@ -91,7 +93,7 @@ Response:
     "trip_date": "2019-07-20T00:00:00.000Z",
     "fare": 70000,
     "status": 1
-  }
+   }
 }
   ```
   
@@ -104,16 +106,16 @@ Response:
   Response: 
   ```json
   {
-  "status": "Success",
-  "data": {
-    "id": 1,
-    "bus_id": 0,
-    "origin": "Yaounde",
-    "destination": "Lagos",
-    "trip_date": "2019-07-20T00:00:00.000Z",
-    "fare": 70000,
-    "status": 1
-    }
+    "status": "Success",
+    "data": {
+      "id": 1,
+      "bus_id": 0,
+      "origin": "Yaounde",
+      "destination": "Lagos",
+      "trip_date": "2019-07-20T00:00:00.000Z",
+      "fare": 70000,
+      "status": 1
+     }
   }
   ```
   
@@ -126,16 +128,16 @@ Response:
   Response:
   ```json
   {
-  "data": {
-    "id": 1,
-    "bus_id": 0,
-    "origin": 0,
-    "destination": 0,
-    "trip_date": 0,
-    "fare": 0,
-    "status": 0
-   },
-   "message": "Trip updated successfully"
+    "data": {
+      "id": 1,
+      "bus_id": 0,
+      "origin": 0,
+      "destination": 0,
+      "trip_date": 0,
+      "fare": 0,
+      "status": 0
+     },
+     "message": "Trip updated successfully"
   }
   ```
   
@@ -152,3 +154,30 @@ Response:
     "data": []
   }
   ```
+  
+  ## Example - Buses
+  
+  ### Create bus
+  
+  URL: http://adc-wayfarer-andela.herokuapp.com/api/v1/buses
+  
+  Request Type: POST
+  
+  ### Get a specific bus
+  
+  URL: http://adc-wayfarer-andela.herokuapp.com/api/v1/buses/1
+  
+  Request Type: GET
+  
+  ### Update a bus
+  
+  URL: http://adc-wayfarer-andela.herokuapp.com/api/v1/buses/1
+
+  Request Type: PATCH
+  
+  ### Delete a bus
+  
+  URL: http://adc-wayfarer-andela.herokuapp.com/api/v1/buses/1
+  
+  Request Type: DELETE
+ 

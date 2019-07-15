@@ -5,7 +5,7 @@ export default {
   },
 
   createBookingsTable: () => {
-    const queryString = `CREATE TABLE bookings ( id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY,
+    const queryString = `CREATE TABLE bookings ( id SERIAL PRIMARY KEY,
                                                 trip_id INTEGER,
                                                 user_id INTEGER,
                                                 bus_id INTEGER,

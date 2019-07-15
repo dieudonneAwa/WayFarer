@@ -12,8 +12,7 @@ export default {
                                               destination varchar(255),
                                               trip_date DATE,
                                               fare DOUBLE PRECISION,
-                                              status DOUBLE PRECISION,
-                                              )`;
+                                              status DOUBLE PRECISION )`;
     return queryString;
   },
 };

@@ -14,8 +14,7 @@ export default {
                                                 first_name VARCHAR(255),
                                                 last_name VARCHAR(255),
                                                 email VARCHAR(255),
-                                                created_on DATE,
-                                                )`;
+                                                created_on TIMESTAMP DEFAULT NOW() )`;
     return queryString;
   },
 };

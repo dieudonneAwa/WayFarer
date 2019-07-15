@@ -9,14 +9,13 @@ export default {
 
   // 2 create users table
   createUsersTable: () => {
-    const queryString = `CREATE TABLE users (id SERIAL PRIMARY KEY,
+    const queryString = `CREATE TABLE users ( id SERIAL PRIMARY KEY,
                                               first_name varchar(255),
                                               last_name varchar(255),
                                               username varchar(255),
                                               email varchar(255),
                                               is_admin boolean,
-                                              password varchar(255),
-                                              )`;
+                                              password varchar(255) )`;
     return queryString;
   },
 

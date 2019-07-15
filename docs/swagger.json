@@ -8,7 +8,7 @@
       "email" : "dieudonneawa7@gmail.com"
     }
   },
-  "host" : "www.adc-wayfarer-andela.herokuapp.com",
+  "host" : "adc-wayfarer-andela.herokuapp.com",
   "basePath" : "/api/v1/",
   "tags" : [ {
     "name" : "bookings",
@@ -20,7 +20,7 @@
     "name" : "trips",
     "description" : "Operations on trips"
   } ],
-  "schemes" : [ "https", "http" ],
+  "schemes" : [ "http" ],
   "paths" : {
     "/auth/signup" : {
       "post" : {

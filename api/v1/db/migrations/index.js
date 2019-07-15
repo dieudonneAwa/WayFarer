@@ -12,6 +12,10 @@ if (process.env.NODE_ENV === 'test') {
   connectionString = process.env.DATABASE_URL;
 }
 
+const pool = new Pool({
+  connectionString,
+});
+
 const client = new Client({
   connectionString,
 });

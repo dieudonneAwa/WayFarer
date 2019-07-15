@@ -1,5 +1,5 @@
 # WayFarer
-WayFarer is a public bus transportation booking server where a client can book a trip, view all his/her bookings and can cancel any if necessary. to understand more, visit the api documentation on heroku at: http://adc-wayfarer-andela.herokuapp.com/api/v1/api-docs/
+WayFarer is a public bus transportation booking server where a client can book a trip, view all his/her bookings and can cancel any if necessary. to understand more, visit the api documentation hosted on heroku at: [WayFarer API Documentation](http://adc-wayfarer-andela.herokuapp.com/api/v1/api-docs/)
 
 [![Build Status](https://travis-ci.org/dieudonneAwa/WayFarer.svg?branch=develop)](https://travis-ci.org/dieudonneAwa/WayFarer)
 [![Coverage Status](https://coveralls.io/repos/github/dieudonneAwa/WayFarer/badge.svg?branch=develop)](https://coveralls.io/github/dieudonneAwa/WayFarer?branch=develop)
@@ -99,7 +99,7 @@ Response:
   
   ### Get a specific trip
   
-  URL: http://adc-wayfarer-andela.herokuapp.com/api/v1/trips/2
+  URL: `http://adc-wayfarer-andela.herokuapp.com/api/v1/trips/2`
   
   Request Type: GET
   
@@ -121,7 +121,7 @@ Response:
   
   ### Update a trip
   
-  URL: http://adc-wayfarer-andela.herokuapp.com/api/v1/trips/2
+  URL: `http://adc-wayfarer-andela.herokuapp.com/api/v1/trips/2`
   
   Request Type: PATCH
   
@@ -143,7 +143,7 @@ Response:
   
   ### Delete a trip
   
-  URL: http://adc-wayfarer-andela.herokuapp.com/api/v1/trips/2
+  URL: `http://adc-wayfarer-andela.herokuapp.com/api/v1/trips/2`
   
   Request Type: DELETE
   
@@ -159,25 +159,25 @@ Response:
   
   ### Create bus
   
-  URL: http://adc-wayfarer-andela.herokuapp.com/api/v1/buses
+  URL: `http://adc-wayfarer-andela.herokuapp.com/api/v1/buses`
   
   Request Type: POST
   
   ### Get a specific bus
   
-  URL: http://adc-wayfarer-andela.herokuapp.com/api/v1/buses/1
+  URL: `http://adc-wayfarer-andela.herokuapp.com/api/v1/buses/1`
   
   Request Type: GET
   
   ### Update a bus
   
-  URL: http://adc-wayfarer-andela.herokuapp.com/api/v1/buses/1
+  URL: `http://adc-wayfarer-andela.herokuapp.com/api/v1/buses/1`
 
   Request Type: PATCH
   
   ### Delete a bus
   
-  URL: http://adc-wayfarer-andela.herokuapp.com/api/v1/buses/1
+  URL: `http://adc-wayfarer-andela.herokuapp.com/api/v1/buses/1`
   
   Request Type: DELETE
  

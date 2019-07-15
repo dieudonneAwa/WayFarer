@@ -1,4 +1,4 @@
-import { Client, Pool } from 'pg';
+import { Pool, Client } from 'pg';
 import users from './users';
 import trips from './trips';
 import buses from './buses';

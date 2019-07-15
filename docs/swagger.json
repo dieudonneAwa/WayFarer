@@ -9,7 +9,7 @@
     }
   },
   "host" : "www.adc-wayfarer-andela.herokuapp.com",
-  "basePath" : "/api/v1/api-docs/",
+  "basePath" : "/api/v1/",
   "tags" : [ {
     "name" : "bookings",
     "description" : "Operations on bookings"

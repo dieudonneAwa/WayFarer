@@ -13,11 +13,7 @@ export default {
                                               trip_date DATE,
                                               fare DOUBLE PRECISION,
                                               status DOUBLE PRECISION,
-                                              CONSTRAINT trips_pkey PRIMARY KEY (id),
-                                              CONSTRAINT trips_bus_id_fkey FOREIGN KEY (bus_id)
-                                              REFERENCES buses (id) MATCH SIMPLE
-                                              ON UPDATE CASCADE
-                                              ON DELETE CASCADE)`;
+                                              )`;
     return queryString;
   },
 };

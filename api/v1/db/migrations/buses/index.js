@@ -12,8 +12,7 @@ export default {
                                               manufacturer varchar(255),
                                               model varchar(255),
                                               year varchar(255),
-                                              capacity INTEGER,
-                                              CONSTRAINT buses_pkey PRIMARY KEY (id))`;
+                                              capacity INTEGER)`;
     return queryString;
   },
 

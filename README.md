@@ -73,6 +73,53 @@ bookings.
 | /api/v1/buses/:busId | DELETE | busId |
 
 
+## Example - Sign up
+ 
+ ### Sign up a user
+ 
+ URL: `http://adc-wayfarer-andela.herokuapp.com/api/v1/auth/signup`
+ 
+ Request Type: POST
+ 
+ Response: 
+ ```json
+ {
+  "status": "Success",
+  "data": {
+    "id": 1,
+    "first_name": "John",
+    "last_name": "Richman",
+    "username": "Richman",
+    "email": "johnrichman@example.com",
+    "is_admin": 0,
+    "token": "eyJhbGciOiJIU..."
+  }
+}
+ ``` 
+ 
+ ### Sign in a user
+ 
+ URL: `http://adc-wayfarer-andela.herokuapp.com/api/v1/auth/signin`
+ 
+ Request Type: POST
+ 
+ Response: 
+ ```json
+ {
+  "status": "Success",
+  "data": {
+    "id": 1,
+    "first_name": "John",
+    "last_name": "Richman",
+    "username": "Richman",
+    "email": "johnrichman@example.com",
+    "is_admin": false,
+    "password": "$2a$10$raHM.b1hGdLfN...",
+    "token": "eyJhbGciOiJIUzI1NiI..."
+  }
+}
+ ```
+
 ## Examples - trips
 
 ### create a trip
@@ -178,6 +225,33 @@ Response:
   ### Delete a bus
   
   URL: `http://adc-wayfarer-andela.herokuapp.com/api/v1/buses/1`
+  
+  Request Type: DELETE
+  
+  
+  ## Example - Bookings
+  
+  ### Create a booking
+  
+  URL: `http://adc-wayfarer-andela.herokuapp.com/api/v1/bookings`
+  
+  Request Type: POST
+  
+  ### Get a specific booking
+  
+  URL: `http://adc-wayfarer-andela.herokuapp.com/api/v1/bookings/1`
+  
+  Request Type: GET
+  
+  ### Update a booking
+  
+  URL: `http://adc-wayfarer-andela.herokuapp.com/api/v1/bookings/1`
+
+  Request Type: PATCH
+  
+  ### Delete a booking
+  
+  URL: `http://adc-wayfarer-andela.herokuapp.com/api/v1/bookings/1`
   
   Request Type: DELETE
  

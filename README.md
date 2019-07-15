@@ -1,5 +1,5 @@
 # WayFarer
-WayFarer is a public bus transportation booking server.
+WayFarer is a public bus transportation booking server where a client can book a trip, view all his/her bookings and can cancel any if necessary. to understand more, visit the api documentation on heroku at: http://adc-wayfarer-andela.herokuapp.com/api/v1/api-docs/
 
 [![Build Status](https://travis-ci.org/dieudonneAwa/WayFarer.svg?branch=develop)](https://travis-ci.org/dieudonneAwa/WayFarer)
 [![Coverage Status](https://coveralls.io/repos/github/dieudonneAwa/WayFarer/badge.svg?branch=develop)](https://coveralls.io/github/dieudonneAwa/WayFarer?branch=develop)
@@ -73,3 +73,82 @@ bookings.
 | /api/v1/buses/:busId | DELETE | busId |
 
 
+## Examples - trips
+### create a trip
+URL: http://adc-wayfarer-andela.herokuapp.com/api/v1/trips
+
+Request Type: POST
+
+Response: 
+  ```json
+{
+  "status": "Success",
+  "data": {
+    "id": 1,
+    "bus_id": 0,
+    "origin": "Yaounde",
+    "destination": "Lagos",
+    "trip_date": "2019-07-20T00:00:00.000Z",
+    "fare": 70000,
+    "status": 1
+  }
+}
+  ```
+  
+  ### Get a specific trip
+  
+  URL: http://adc-wayfarer-andela.herokuapp.com/api/v1/trips/2
+  
+  Request Type: GET
+  
+  Response: 
+  ```json
+  {
+  "status": "Success",
+  "data": {
+    "id": 1,
+    "bus_id": 0,
+    "origin": "Yaounde",
+    "destination": "Lagos",
+    "trip_date": "2019-07-20T00:00:00.000Z",
+    "fare": 70000,
+    "status": 1
+    }
+  }
+  ```
+  
+  ### Update a trip
+  
+  URL: http://adc-wayfarer-andela.herokuapp.com/api/v1/trips/2
+  
+  Request Type: PATCH
+  
+  Response:
+  ```json
+  {
+  "data": {
+    "id": 1,
+    "bus_id": 0,
+    "origin": 0,
+    "destination": 0,
+    "trip_date": 0,
+    "fare": 0,
+    "status": 0
+   },
+   "message": "Trip updated successfully"
+  }
+  ```
+  
+  ### Delete a trip
+  
+  URL: http://adc-wayfarer-andela.herokuapp.com/api/v1/trips/2
+  
+  Request Type: DELETE
+  
+  Response:
+  ```json
+  {
+    "status": "Trip deleted!",
+    "data": []
+  }
+  ```

@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon --exec babel-node api/server.js",
-    "test": "cross-env NODE_ENV=test npm run migrate && mocha --require babel-register ./test/*.test.js --exit || true",
+    "test": "npm run migrate:test && cross-env NODE_ENV=test nyc mocha --require babel-register ./test/*.test.js --exit || true",
     "clean": "rm -rf lib && mkdir lib",
     "build": "npm run clean && babel api -d ./lib",
     "migrate:test": "cross-env NODE_ENV=test babel-node api/v1/db/migrations/index.js",
@@ -36,7 +36,8 @@
     "eslint-plugin-import": "2.18.0",
     "mocha": "^6.1.4",
     "mocha-lcov-reporter": "^1.3.0",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "nyc": "^14.1.1"
   },
   "dependencies": {
     "bcrypt": "^3.0.6",

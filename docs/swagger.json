@@ -8,8 +8,8 @@
       "email" : "dieudonneawa7@gmail.com"
     }
   },
-  "host" : "virtserver.swaggerhub.com",
-  "basePath" : "/dieudonneAwa/WayFarer/1.0.0",
+  "host" : "www.adc-wayfarer-andela.herokuapp.com",
+  "basePath" : "/api/v1/api-docs/",
   "tags" : [ {
     "name" : "bookings",
     "description" : "Operations on bookings"

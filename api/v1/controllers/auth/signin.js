@@ -21,18 +21,21 @@ async function loginById(userId) {
 
 export default {
   async login(req, res) {
-    const { email, password } = req.body;
-    const rows = await User.find({ email });
-    const user = rows[0];
+    try {
+      const { email, password } = req.body;
+      const rows = await User.find({ email });
+      const user = rows[0];
 
-    if (!user) {
-      return res.status(400).json({ errors: { global: 'Wrong credentials' } });
+      if (!user) {
+        return res.status(400).json({ errors: { global: 'Wrong credentials' } });
+      }
+      if (bcrypt.compareSync(password, user.password)) {
+        const { token } = await loginById(user.id);
+        user.token = token;
+        return res.status(200).send({ status: 'Success', data: user });
+      }
+    } catch (error) {
+      return res.status(500).json({ errors: 'There was a problem signing in' });
     }
-    if (bcrypt.compareSync(password, user.password)) {
-      const { token } = await loginById(user.id);
-      user.token = token;
-      return res.status(200).send({ status: 'Success', data: user });
-    }
-    return res.status(400).json({ errors: { global: 'Wrong credentials' } });
   },
 };

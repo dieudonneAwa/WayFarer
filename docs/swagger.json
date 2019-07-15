@@ -1,0 +1,615 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "WayFarer is a public bus transportation booking server.",
+    "version" : "1.0.0",
+    "title" : "WayFarer",
+    "contact" : {
+      "email" : "dieudonneawa7@gmail.com"
+    }
+  },
+  "host" : "virtserver.swaggerhub.com",
+  "basePath" : "/dieudonneAwa/WayFarer/1.0.0",
+  "tags" : [ {
+    "name" : "bookings",
+    "description" : "Operations on bookings"
+  }, {
+    "name" : "buses",
+    "description" : "Operations on buses"
+  }, {
+    "name" : "trips",
+    "description" : "Operations on trips"
+  } ],
+  "schemes" : [ "https", "http" ],
+  "paths" : {
+    "/auth/signup" : {
+      "post" : {
+        "tags" : [ "singup" ],
+        "summary" : "Add a new user to the api",
+        "description" : "User sign up",
+        "operationId" : "signupUser",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "User object that needs to be added to the api",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Signup"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Sign up successful"
+          },
+          "201" : {
+            "description" : "User created"
+          },
+          "400" : {
+            "description" : "Invalid request"
+          }
+        }
+      }
+    },
+    "/auth/signin" : {
+      "post" : {
+        "tags" : [ "singin" ],
+        "summary" : "Signs in a user",
+        "description" : "User sign in",
+        "operationId" : "signinUser",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "User object that needs to be added to the api",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Signin"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "User signed in"
+          },
+          "400" : {
+            "description" : "Invalid request"
+          }
+        }
+      }
+    },
+    "/bookings" : {
+      "get" : {
+        "tags" : [ "bookings" ],
+        "summary" : "Fetch all bookings",
+        "description" : "",
+        "operationId" : "getAllBookings",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Fetched bookings successfully"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "bookings" ],
+        "summary" : "Create bookings",
+        "description" : "create Booking",
+        "operationId" : "createBooking",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Booking object to be created",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Booking"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Booking Created"
+          },
+          "400" : {
+            "description" : "Invalid request"
+          }
+        }
+      }
+    },
+    "/bookings/{booking_id}" : {
+      "get" : {
+        "tags" : [ "bookings" ],
+        "summary" : "Fetch booking by ID",
+        "description" : "Returns a booking",
+        "operationId" : "getOneBooking",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "booking_id",
+          "in" : "path",
+          "description" : "ID of booking to return",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation"
+          },
+          "400" : {
+            "description" : "Invalid ID supplied"
+          },
+          "404" : {
+            "description" : "Booking not found"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "bookings" ],
+        "summary" : "Delete booking by ID",
+        "description" : "Returns an empty object",
+        "operationId" : "deleteBooking",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "booking_id",
+          "in" : "path",
+          "description" : "ID of booking to be updated",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation"
+          },
+          "400" : {
+            "description" : "Invalid ID supplied"
+          },
+          "404" : {
+            "description" : "Booking not found"
+          }
+        }
+      },
+      "patch" : {
+        "tags" : [ "bookings" ],
+        "summary" : "Update booking by ID",
+        "description" : "Returns an updated booking",
+        "operationId" : "updateBooking",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "booking_id",
+          "in" : "path",
+          "description" : "ID of booking to be updated",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Booking"
+            }
+          },
+          "400" : {
+            "description" : "Invalid ID supplied"
+          },
+          "404" : {
+            "description" : "Booking not found"
+          }
+        }
+      }
+    },
+    "/buses" : {
+      "get" : {
+        "tags" : [ "buses" ],
+        "summary" : "Fetch all buses",
+        "description" : "",
+        "operationId" : "getAllBuses",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Fetched buses successfully"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "buses" ],
+        "summary" : "Create buses",
+        "description" : "create a bus",
+        "operationId" : "createBus",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Bus object to be created",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Bus"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Bus Created"
+          },
+          "400" : {
+            "description" : "Invalid request"
+          }
+        }
+      }
+    },
+    "/buses/{bus_id}" : {
+      "get" : {
+        "tags" : [ "buses" ],
+        "summary" : "Fetch bus by ID",
+        "description" : "Returns a bus",
+        "operationId" : "getOneBus",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "bus_id",
+          "in" : "path",
+          "description" : "ID of bus to return",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation"
+          },
+          "400" : {
+            "description" : "Invalid ID supplied"
+          },
+          "404" : {
+            "description" : "Bus not found"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "buses" ],
+        "summary" : "Delete bus by ID",
+        "description" : "Returns an empty object",
+        "operationId" : "deleteBus",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "bus_id",
+          "in" : "path",
+          "description" : "ID of bus to be updated",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation"
+          },
+          "400" : {
+            "description" : "Invalid ID supplied"
+          },
+          "404" : {
+            "description" : "Bus not found"
+          }
+        }
+      },
+      "patch" : {
+        "tags" : [ "buses" ],
+        "summary" : "Update bus by ID",
+        "description" : "Returns an updated bus",
+        "operationId" : "updateBus",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "bus_id",
+          "in" : "path",
+          "description" : "ID of bus to be updated",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Bus"
+            }
+          },
+          "400" : {
+            "description" : "Invalid ID supplied"
+          },
+          "404" : {
+            "description" : "Bus not found"
+          }
+        }
+      }
+    },
+    "/trips" : {
+      "get" : {
+        "tags" : [ "trips" ],
+        "summary" : "Fetch all trips",
+        "description" : "",
+        "operationId" : "getAllTrips",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Fetched trips successfully"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "trips" ],
+        "summary" : "Create trips",
+        "description" : "create a trip",
+        "operationId" : "createTrip",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Trip object to be created",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Trip"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Trip Created"
+          },
+          "400" : {
+            "description" : "Invalid request"
+          }
+        }
+      }
+    },
+    "/trips/{trip_id}" : {
+      "get" : {
+        "tags" : [ "trips" ],
+        "summary" : "Fetch trip by ID",
+        "description" : "Returns a trip",
+        "operationId" : "getOneTrip",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "trip_id",
+          "in" : "path",
+          "description" : "ID of trip to return",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation"
+          },
+          "400" : {
+            "description" : "Invalid ID supplied"
+          },
+          "404" : {
+            "description" : "Trip not found"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "trips" ],
+        "summary" : "Delete trip by ID",
+        "description" : "Returns an empty object",
+        "operationId" : "deleteTrip",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "trip_id",
+          "in" : "path",
+          "description" : "ID of trip to be updated",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation"
+          },
+          "400" : {
+            "description" : "Invalid ID supplied"
+          },
+          "404" : {
+            "description" : "Booking not found"
+          }
+        }
+      },
+      "patch" : {
+        "tags" : [ "trips" ],
+        "summary" : "Update trip by ID",
+        "description" : "Returns an updated trip",
+        "operationId" : "updateTrip",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "trip_id",
+          "in" : "path",
+          "description" : "ID of trip to be updated",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Trip"
+            }
+          },
+          "400" : {
+            "description" : "Invalid ID supplied"
+          },
+          "404" : {
+            "description" : "Trip not found"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "Signup" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "first_name" : {
+          "type" : "string",
+          "example" : "Awa"
+        },
+        "last_name" : {
+          "type" : "string",
+          "example" : "Dieudonne Mbuh"
+        },
+        "username" : {
+          "type" : "string",
+          "example" : "Awa"
+        },
+        "email" : {
+          "type" : "string",
+          "example" : "awa@example.com"
+        },
+        "is_admin" : {
+          "type" : "boolean",
+          "example" : true
+        },
+        "password" : {
+          "type" : "string",
+          "example" : "12345678"
+        }
+      },
+      "xml" : {
+        "name" : "Signup"
+      }
+    },
+    "Signin" : {
+      "type" : "object",
+      "properties" : {
+        "email" : {
+          "type" : "string",
+          "example" : "awa@example.com"
+        },
+        "password" : {
+          "type" : "string",
+          "example" : "12345678"
+        }
+      },
+      "xml" : {
+        "name" : "Signin"
+      }
+    },
+    "Booking" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "example" : 1
+        },
+        "user_id" : {
+          "type" : "integer",
+          "example" : 1
+        },
+        "trip_id" : {
+          "type" : "integer",
+          "example" : 1
+        },
+        "bus_id" : {
+          "type" : "integer",
+          "example" : 1
+        },
+        "trip_date" : {
+          "type" : "string",
+          "example" : "2019-7-16"
+        },
+        "seat_number" : {
+          "type" : "integer",
+          "example" : 1
+        },
+        "first_name" : {
+          "type" : "string",
+          "example" : "Awa"
+        },
+        "last_name" : {
+          "type" : "string",
+          "example" : "Dieudonne Mbuh"
+        },
+        "email" : {
+          "type" : "string",
+          "example" : "awa@example.com"
+        }
+      },
+      "xml" : {
+        "name" : "Booking"
+      }
+    },
+    "Bus" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "example" : 1
+        },
+        "number_plate" : {
+          "type" : "string",
+          "example" : "CM 789 SW"
+        },
+        "manufacturer" : {
+          "type" : "string",
+          "example" : "Ford"
+        },
+        "model" : {
+          "type" : "integer",
+          "example" : "V9"
+        },
+        "year" : {
+          "type" : "string",
+          "example" : "1990"
+        },
+        "capacity" : {
+          "type" : "integer",
+          "example" : 5
+        }
+      },
+      "xml" : {
+        "name" : "Bus"
+      }
+    },
+    "Trip" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "example" : 1
+        },
+        "bus_id" : {
+          "type" : "string",
+          "example" : "1"
+        },
+        "origin" : {
+          "type" : "string",
+          "example" : "Yaounde"
+        },
+        "destination" : {
+          "type" : "string",
+          "example" : "Lagos"
+        },
+        "trip_date" : {
+          "type" : "string",
+          "example" : "2019-7-20"
+        },
+        "fare" : {
+          "type" : "number",
+          "example" : 70000.0
+        },
+        "status" : {
+          "type" : "number",
+          "example" : 1.0
+        }
+      },
+      "xml" : {
+        "name" : "Trip"
+      }
+    }
+  }
+}

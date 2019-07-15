@@ -16,7 +16,7 @@ export default {
                                               email varchar(255),
                                               is_admin boolean,
                                               password varchar(255),
-                                              CONSTRAINT users_pkey PRIMARY KEY (id))`;
+                                              )`;
     return queryString;
   },
 

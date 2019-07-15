@@ -34,6 +34,9 @@ const initTables = async () => {
     // INITIALIZE BUSES TABLE
     await buses.initBuses();
 
+    // INITIALIZE USERS TABLE
+    await users.initUsers();
+
     await client.end();
     console.log('Tables created successfully');
   } catch (error) {

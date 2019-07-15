@@ -1,4 +1,4 @@
-// Create two functions
+import db from '../../index';
 
 export default {
   // 1 drop users table
@@ -18,5 +18,14 @@ export default {
                                               password varchar(255),
                                               CONSTRAINT users_pkey PRIMARY KEY (id))`;
     return queryString;
+  },
+
+  // Initialize users table
+  initUsers: () => {
+    const params = ['Awa', 'Alexis', 'Alex', 'alex@example.com', false, '12345678'];
+    const queryString = `INSERT INTO users (first_name, last_name, username, email, is_admin, password) 
+                        VALUES 
+                        ($1, $2, $3,$4, $5, $6) RETURNING *`;
+    return db.query(queryString, params);
   },
 };

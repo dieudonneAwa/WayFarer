@@ -1,29 +1,9 @@
-import jwt from 'jsonwebtoken';
 import Booking from '../models/bookingModel';
-
-const createTokenById = (booking) => {
-  const newBooking = {
-    id: booking.id,
-    trip_id: booking.trip_id,
-    user_id: booking.user_id,
-    bus_id: booking.bus_id,
-    trip_date: booking.trip_date,
-    seat_number: booking.trip_date,
-    first_name: booking.first_name,
-    last_name: booking.last_name,
-    email: booking.email,
-    created_on: booking.created_on,
-  };
-
-  const token = jwt.sign(newBooking, 'process.env.JWT_SECRET', '');
-  return token;
-};
 
 export default {
   async createBooking(req, res) {
     try {
       const booking = new Booking(req.body);
-      booking.token = createTokenById(booking);
       const newBooking = await booking.save();
 
       return res.status(201).json({ status: 'Success', data: newBooking });
@@ -64,6 +44,7 @@ export default {
     booking.trip_id = req.body.trip_id;
     booking.user_id = req.body.user_id;
     booking.bus_id = req.body.bus_id;
+    booking.seat_number = req.body.seat_number;
     booking.created_on = req.body.created_on;
 
     try {

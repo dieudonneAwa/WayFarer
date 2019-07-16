@@ -4,7 +4,7 @@ export default {
   async createBooking(req, res) {
     try {
       const { body } = req;
-      if (!body.trip_id || !body.user_id || !body.bus_id || !body.seat_number || !body.first_name || !body.last_name || !body.email) {
+      if (!body.trip_id || !body.user_id || !body.bus_id) {
         return res.status(400).json({ status: 'error', error: 'Please provide all bookings infos' });
       }
 

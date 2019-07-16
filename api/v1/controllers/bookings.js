@@ -61,6 +61,9 @@ export default {
       res.status(200).send({ status: 'error', error: 'booking not found' });
     }
 
+    booking.trip_id = req.body.trip_id;
+    booking.user_id = req.body.user_id;
+    booking.bus_id = req.body.bus_id;
     booking.created_on = req.body.created_on;
 
     try {
@@ -73,13 +76,14 @@ export default {
 
   async deleteBooking(req, res) {
     const bookingId = parseInt(req.params.bookingId, 10);
-
+    
     if (!bookingId || Number.isNaN(bookingId)) {
       return res.status(400).send({ status: 'error', error: 'Invalid booking id' });
     }
-
+    
     try {
-      const emptyBooking = await Booking.delete(bookingId);
+      const booking = await Booking.findById(bookingId);
+      const emptyBooking = await Booking.delete(booking.id);
       return res.status(204).json({ status: 'Success', data: emptyBooking });
     } catch (error) {
       throw error;

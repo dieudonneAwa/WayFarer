@@ -13,7 +13,6 @@ export default class Booking {
 
   // eslint-disable-next-line class-methods-use-this
   async save() {
-    // const params = [this.trip_id, this.user_id, this.bus_id];
     try {
       const { rows } = await db.query(`INSERT INTO bookings 
                           (created_on)

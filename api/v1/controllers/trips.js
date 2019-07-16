@@ -4,6 +4,11 @@ import Trip from '../models/tripModel';
 export default {
   async createTrip(req, res) {
     try {
+      const { body } = req;
+       if (!body.bus_id || !body.origin || !body.destination || !body.trip_date || !body.fare || !body.status) {
+        return res.status(400).json({ status: 'error', error: 'Please provide all trips info' });
+      }
+
       const trip = new Trip(req.body);
       const newTrip = await trip.save();
       newTrip.trip_id = newTrip.id;

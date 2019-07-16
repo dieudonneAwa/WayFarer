@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import User from '../../models/userModel';
 
-async function loginById(userId) {
+export const loginById = async (userId) => {
   const user = await User.findById(userId);
 
   const loginUser = {

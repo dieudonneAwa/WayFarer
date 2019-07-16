@@ -76,11 +76,11 @@ export default {
 
   async deleteBooking(req, res) {
     const bookingId = parseInt(req.params.bookingId, 10);
-    
+
     if (!bookingId || Number.isNaN(bookingId)) {
       return res.status(400).send({ status: 'error', error: 'Invalid booking id' });
     }
-    
+
     try {
       const booking = await Booking.findById(bookingId);
       const emptyBooking = await Booking.delete(booking.id);

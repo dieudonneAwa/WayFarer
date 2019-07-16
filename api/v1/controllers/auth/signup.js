@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '../../models/userModel';
 
-async function loginById(userId) {
+const loginById = async (userId) => {
   const user = await User.findById(userId);
 
   const loginUser = {
@@ -14,21 +14,22 @@ async function loginById(userId) {
     is_admin: user.is_admin,
   };
   const token = jwt.sign(loginUser, 'process.env.JWT_SECRET', '');
-  loginUser.token = token;
-  return loginUser;
-}
+  return token;
+};
 
 export default {
   async signUp(req, res) {
-    try {
-      const user = new User(req.body);
-      user.password = bcrypt.hashSync(req.body.password, 10);
-      const newUser = await user.save();
+    const user = new User(req.body);
+    user.password = bcrypt.hashSync(req.body.password, 10);
 
+    try {
+      const newUser = await user.save();
       const token = await loginById(newUser.id);
-      return res.status(200).json({ status: 'Success', data: token });
+
+      newUser.token = token;
+      return res.status(200).json({ status: 'Success', data: newUser });
     } catch (error) {
-      console.log(error);
+      return res.status(500).json({ status: 'error', error });
     }
   },
 

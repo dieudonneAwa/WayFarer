@@ -15,7 +15,7 @@ export default {
 
       return res.status(201).json({ status: 'Success', data: newTrip });
     } catch (error) {
-      throw error;
+      return res.status(500).json({ status: 'error', error: 'Únable to create trip' });
     }
   },
 
@@ -27,7 +27,7 @@ export default {
       }
       return res.status(200).json({ status: 'Success', data: allTrips });
     } catch (error) {
-      throw error;
+      return res.status(500).json({ status: 'error', error: 'Únable to get trips' });
     }
   },
 
@@ -37,7 +37,7 @@ export default {
       const oneTrip = await Trip.findById(tripId);
       return res.status(200).json({ status: 'Success', data: oneTrip });
     } catch (error) {
-      throw error;
+      return res.status(500).json({ status: 'error', error: 'Únable to get trip' });
     }
   },
 
@@ -62,7 +62,7 @@ export default {
 
       return res.status(200).json({ status: 'Trip updated successfully', data: { message: 'Trip cancelled successfully' } });
     } catch (error) {
-      throw error;
+      return res.status(500).json({ status: 'error', error: 'Únable to update trip' });
     }
   },
 

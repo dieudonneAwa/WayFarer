@@ -31,11 +31,15 @@ export default {
   },
 
   async getAllTrips(req, res) {
-    const allTrips = await Trip.findAll({});
-    if (!allTrips.length) {
-      return res.status(200).send({ status: 'No Trips yet', data: [] });
+    try {
+      const allTrips = await Trip.findAll();
+      if (!allTrips.length) {
+        return res.status(404).send({ status: 'No Trips yet', data: [] });
+      }
+      return res.status(200).json({ status: 'Success', data: allTrips });
+    } catch (error) {
+      throw error;
     }
-    return res.status(200).json({ status: 'Success', data: allTrips });
   },
 
   async getOneTrip(req, res) {
@@ -54,20 +58,24 @@ export default {
       res.status(400).send({ status: 'error', error: 'A valid trip Id is required' });
     }
 
-    const trip = await Trip.findById(tripId);
-    if (!trip.id) {
-      res.status(200).send({ status: 'error', error: 'trip not found' });
+    try {
+      const trip = await Trip.findById(tripId);
+      if (!trip.id) {
+        res.status(200).send({ status: 'error', error: 'trip not found' });
+      }
+
+      trip.bus_id = req.body.bus_id;
+      trip.origin = req.body.origin;
+      trip.destination = req.body.destination;
+      trip.trip_date = req.body.trip_date;
+      trip.fare = req.body.fare;
+      trip.status = req.body.status;
+      const updatedTrip = await trip.update();
+
+      res.status(200).json({ status: 'Trip updated successfully', data: updatedTrip });
+    } catch (error) {
+      throw error;
     }
-
-    trip.bus_id = req.body.bus_id;
-    trip.origin = req.body.origin;
-    trip.destination = req.body.destination;
-    trip.trip_date = req.body.trip_date;
-    trip.fare = req.body.fare;
-    trip.status = req.body.status;
-    const updatedTrip = await trip.update();
-
-    res.status(200).json({ status: 'Trip updated successfully', data: updatedTrip, });
   },
 
   async deleteTrip(req, res) {

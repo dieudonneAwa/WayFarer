@@ -1,4 +1,3 @@
-import jwt from 'jsonwebtoken';
 import Trip from '../models/tripModel';
 
 export default {

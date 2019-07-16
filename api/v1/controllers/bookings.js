@@ -53,19 +53,19 @@ export default {
   async updateBooking(req, res) {
     const { bookingId } = req.params;
     if (bookingId == null) {
-      res.status(400).send({ status: 'error', errors: 'A valid booking Id is required' });
+      res.status(400).send({ status: 'error', error: 'A valid booking Id is required' });
     }
 
     const booking = await Booking.findById(bookingId);
     if (!booking.id) {
-      res.status(200).send({ status: 'error', errors: 'booking not found' });
+      res.status(200).send({ status: 'error', error: 'booking not found' });
     }
 
     booking.created_on = req.body.created_on;
 
     try {
       const updatedBooking = await booking.update();
-      res.status(200).json({ data: updatedBooking, message: 'Booking updated successfully' });
+      res.status(200).json({ status: 'Booking updated successfully', data: updatedBooking });
     } catch (error) {
       throw error;
     }

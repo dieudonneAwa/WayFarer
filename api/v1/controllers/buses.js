@@ -52,12 +52,12 @@ export default {
   async updatebus(req, res) {
     const { busId } = req.params;
     if (busId == null) {
-      res.status(400).send({ status: 'error', errors: 'A valid bus Id is required' });
+      res.status(400).send({ status: 'error', error: 'A valid bus Id is required' });
     }
 
     const bus = await Bus.findById(busId);
     if (!bus.id) {
-      res.status(200).send({ status: 'error', errors: 'bus not found' });
+      res.status(200).send({ status: 'error', error: 'bus not found' });
     }
 
     bus.number_plate = req.body.number_plate;
@@ -67,7 +67,7 @@ export default {
     bus.capacity = req.body.capacity;
     const updatedBus = await bus.update();
 
-    res.status(200).json({ data: updatedBus, message: 'Bus updated successfully' });
+    res.status(200).json({ status: 'Bus updated successfully', data: updatedBus });
   },
 
   async deleteBus(req, res) {
@@ -79,7 +79,7 @@ export default {
 
     try {
       await Bus.delete(busId);
-      return res.status(200).json({ status: 'Bus deleted!', data: [] });
+      return res.status(200).json({ status: 'Bus deleted successfully!', data: [] });
     } catch (error) {
       throw error;
     }

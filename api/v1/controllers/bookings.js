@@ -3,7 +3,7 @@ import Booking from '../models/bookingModel';
 export default {
   async createBooking(req, res) {
     try {
-      const { body } = req; 
+      const { body } = req;
       if (!body.trip_id || !body.user_id || !body.bus_id || !body.seat_number || !body.first_name || !body.last_name || !body.email) {
         return res.status(400).json({ status: 'error', error: 'Please provide all bookings infos' });
       }
@@ -38,12 +38,12 @@ export default {
   async updateBooking(req, res) {
     const { bookingId } = req.params;
     if (bookingId == null) {
-      res.status(400).send({ status: 'error', error: 'A valid booking Id is required' });
+      return res.status(400).send({ status: 'error', error: 'A valid booking Id is required' });
     }
 
     const booking = await Booking.findById(bookingId);
     if (!booking.id) {
-      res.status(200).send({ status: 'error', error: 'booking not found' });
+      return res.status(200).send({ status: 'error', error: 'booking not found' });
     }
 
     booking.trip_id = req.body.trip_id;
@@ -54,7 +54,7 @@ export default {
 
     try {
       const updatedBooking = await booking.update();
-      res.status(200).json({ status: 'Booking updated successfully', data: updatedBooking });
+      return res.status(200).json({ status: 'Booking updated successfully', data: updatedBooking });
     } catch (error) {
       throw error;
     }

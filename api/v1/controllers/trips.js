@@ -42,15 +42,14 @@ export default {
   },
 
   async updateTrip(req, res) {
-    const { tripId } = req.params;
-    if (tripId == null) {
-      res.status(400).send({ status: 'error', error: 'A valid trip Id is required' });
-    }
-
     try {
+      const { tripId } = req.params;
+      if (!tripId) {
+        return res.status(400).send({ status: 'error', error: 'A valid trip Id is required' });
+      }
       const trip = await Trip.findById(tripId);
       if (!trip.id) {
-        res.status(200).send({ status: 'error', error: 'trip not found' });
+        return res.status(404).send({ status: 'error', error: 'trip not found' });
       }
 
       trip.bus_id = req.body.bus_id;
@@ -59,9 +58,9 @@ export default {
       trip.trip_date = req.body.trip_date;
       trip.fare = req.body.fare;
       trip.status = req.body.status;
-      const updatedTrip = await trip.update();
+      await trip.update();
 
-      res.status(200).json({ status: 'Trip updated successfully', data: updatedTrip });
+      return res.status(200).json({ status: 'Trip updated successfully', data: { message: 'Trip cancelled successfully' } });
     } catch (error) {
       throw error;
     }

@@ -8,7 +8,7 @@ export default class Booking {
     this.trip_id = booking && booking.trip_id ? booking.trip_id : null;
     this.user_id = booking && booking.user_id ? booking.user_id : null;
     this.bus_id = booking && booking.bus_id ? booking.bus_id : null;
-    this.seat_number = booking && booking.seat_number ? booking.seat_number : null;
+    this.seat_number = booking && booking.seat_number ? booking.seat_number : 0;
     this.first_name = booking && booking.first_name ? booking.first_name : null;
     this.last_name = booking && booking.last_name ? booking.last_name : null;
     this.email = booking && booking.email ? booking.email : null;

@@ -9,16 +9,19 @@ export default class Booking {
     this.user_id = booking && booking.user_id ? booking.user_id : null;
     this.bus_id = booking && booking.bus_id ? booking.bus_id : null;
     this.seat_number = booking && booking.seat_number ? booking.seat_number : 0;
+    this.first_name = booking && booking.first_name ? booking.first_name : null;
+    this.last_name = booking && booking.last_name ? booking.last_name : null;
+    this.email = booking && booking.email ? booking.email : null;
     this.created_on = booking && booking.created_on ? booking.created_on : null;
   }
 
   // eslint-disable-next-line class-methods-use-this
   async save() {
-    const params = [this.trip_id, this.user_id, this.bus_id, this.seat_number];
+    const params = [this.trip_id, this.user_id, this.bus_id, this.seat_number, this.first_name, this.last_name, this.email];
     try {
       const { rows } = await db.query(`INSERT INTO bookings 
-                          (trip_id, user_id, bus_id, seat_number, created_on)
-                          VALUES ($1, $2, $3, $4, Now()) RETURNING *`, params);
+                          (trip_id, user_id, bus_id, seat_number, first_name, last_name, email, created_on)
+                          VALUES ($1, $2, $3, $4, $5, $6, $7, Now()) RETURNING *`, params);
       const newBooking = new Booking(rows[0]);
       return newBooking;
     } catch (error) {
@@ -46,10 +49,13 @@ export default class Booking {
   }
 
   async update() {
-    const params = [this.trip_id, this.user_id, this.bus_id, this.seat_number, this.id];
+    const params = [this.trip_id, this.user_id, this.bus_id, this.id];
     try {
       const { rows } = await db.query(`UPDATE bookings SET 
-      trip_id=$1, user_id=$2, bus_id=$3, seat_number=$4, created_on=NOW() WHERE id=$5 RETURNING *`, params);
+      trip_id=$1, user_id=$2, bus_id=$3, trip_date=(SELECT trip_date FROM trips WHERE id=$1),
+      first_name=(SELECT first_name FROM users WHERE id=$2), 
+      last_name=(SELECT last_name FROM users WHERE id=$2),
+      email=(SELECT email FROM users WHERE id=$2), created_on=NOW() WHERE id=$4 RETURNING *`, params);
       const booking = new Booking(rows[0]);
       return booking;
     } catch (error) {

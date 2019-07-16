@@ -47,7 +47,7 @@ export default {
         return res.status(400).send({ status: 'error', error: 'A valid trip Id is required' });
       }
       const trip = await Trip.findById(tripId);
-      if (!trip.id) {
+      if (!trip.id || !trip.bus_id) {
         return res.status(404).send({ status: 'error', error: 'trip not found' });
       }
 

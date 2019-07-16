@@ -13,25 +13,29 @@ export default {
 
       return res.status(201).json({ status: 'Success', data: newBooking });
     } catch (error) {
-      throw error;
+      return res.status(500).json({ status: 'error', error: 'Únable to create booking' });
     }
   },
 
   async getAllBookings(req, res) {
-    const allBookings = await Booking.adminFindAll();
-    if (!allBookings.length) {
-      return res.status(200).send({ status: 'No bookings yet', data: [] });
+    try {
+      const allBookings = await Booking.adminFindAll();
+      if (!allBookings.length) {
+        return res.status(200).send({ status: 'No bookings yet', data: [] });
+      }
+      return res.status(200).json({ status: 'Success', data: allBookings });
+    } catch (error) {
+      return res.status(500).json({ status: 'error', error: 'Únable to get bookings' });
     }
-    return res.status(200).json({ status: 'Success', data: allBookings });
   },
 
   async getOneBooking(req, res) {
-    const bookingId = parseInt(req.params.bookingId, 10);
     try {
+      const bookingId = parseInt(req.params.bookingId, 10);
       const oneBooking = await Booking.findById(bookingId);
       return res.status(200).json({ status: 'Success', data: oneBooking });
     } catch (error) {
-      throw error;
+      return res.status(500).json({ status: 'error', error: 'Únable to get booking' });
     }
   },
 
@@ -56,7 +60,7 @@ export default {
       const updatedBooking = await booking.update();
       return res.status(200).json({ status: 'Booking updated successfully', data: updatedBooking });
     } catch (error) {
-      throw error;
+      return res.status(500).json({ status: 'error', error: 'Únable to update booking' });
     }
   },
 
@@ -72,7 +76,7 @@ export default {
       const emptyBooking = await Booking.delete(booking.id);
       return res.status(204).json({ status: 'Success', data: emptyBooking });
     } catch (error) {
-      throw error;
+      return res.status(500).json({ status: 'error', error: 'Únable to delete bookings' });
     }
   },
 };

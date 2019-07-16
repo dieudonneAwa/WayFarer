@@ -48,16 +48,19 @@ export default class Trip {
   }
 
   async update() {
-    const params = [this.origin, this.destination, this.trip_date, this.fare, this.status, this.id];
+    const params = [this.bus_id, this.origin, this.destination, this.trip_date, this.fare,
+      this.status, this.id];
+
     try {
-      const { rows } = await db.query(`UPDATE trips SET 
-                          origin=$1,
-                          destination=$2,
-                          trip_date=$3,
-                          fare=$4,
-                          status=$5 
-                      WHERE id=$6 RETURNING *`, params);
-      const trip = new Trip(rows[0]);
+      await db.query(`UPDATE trips SET 
+                          bus_id=$1,
+                          origin=$2,
+                          destination=$3,
+                          trip_date=$4,
+                          fare=$5,
+                          status=$6 
+                      WHERE id=$7 RETURNING *`, params);
+      const trip = await Trip.findById(this.id);
       return trip;
     } catch (error) {
       return error;

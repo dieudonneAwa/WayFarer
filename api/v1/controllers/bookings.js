@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import Booking from '../models/bookingModel';
 
-const createTokenById = async (booking) => {
+const createTokenById = (booking) => {
   const newBooking = {
     id: booking.id,
     trip_id: booking.trip_id,

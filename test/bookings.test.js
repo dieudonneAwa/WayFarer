@@ -12,6 +12,7 @@ const booking = {
   trip_id: 1,
   user_id: 1,
   bus_id: 1,
+  seat_number: 1,
   created_on: 'NOW()',
 };
 
@@ -25,8 +26,8 @@ describe('Bookings', () => {
       .end((err, res) => {
         res.should.have.status(201);
         res.body.should.be.a('object');
-        done();
-      });
+        res.body.should.have.property('seat_number');
+      }); done();
   });
 
   it('GET /api/v1/bookings Should get all bookings.', (done) => {

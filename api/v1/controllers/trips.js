@@ -1,28 +1,12 @@
 import jwt from 'jsonwebtoken';
 import Trip from '../models/tripModel';
 
-const createToken = async (trip) => {
-
-  const tripObj = {
-    id: trip.id,
-    bus_id: trip.bus_id,
-    origin: trip.origin,
-    destination: trip.destination,
-    trip_date: trip.trip_date,
-    fare: trip.fare,
-    status: trip.status,
-  };
-  const token = jwt.sign(tripObj, 'process.env.JWT_SECRET', '');
-  return token;
-};
-
 export default {
   async createTrip(req, res) {
     try {
       const trip = new Trip(req.body);
-      const token = createToken(trip);
-      trip.token = token;
       const newTrip = await trip.save();
+      newTrip.trip_id = newTrip.id;
 
       return res.status(201).json({ status: 'Success', data: newTrip });
     } catch (error) {

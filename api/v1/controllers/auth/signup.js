@@ -20,12 +20,13 @@ const loginById = async (userId) => {
 export default {
   async signUp(req, res) {
     const user = new User(req.body);
-    user.password = bcrypt.hashSync(req.body.password, 10);
 
     try {
+      const userPassword = await req.body.password;
+      user.password = await bcrypt.hashSync(userPassword, 10);
       const newUser = await user.save();
-      const token = await loginById(newUser.id);
 
+      const token = await loginById(newUser.id);
       newUser.token = token;
       return res.status(200).json({ status: 'Success', data: newUser });
     } catch (error) {

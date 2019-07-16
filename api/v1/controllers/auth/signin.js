@@ -31,6 +31,7 @@ export default {
       }
       if (bcrypt.compareSync(password, user.password)) {
         const { token } = await loginById(user.id);
+        delete user.password;
         user.token = token;
         return res.status(200).send({ status: 'Success', data: user });
       }

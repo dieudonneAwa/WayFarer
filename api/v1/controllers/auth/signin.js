@@ -27,7 +27,7 @@ export default {
       const user = rows[0];
 
       if (!user) {
-        return res.status(400).json({ errors: { global: 'Wrong credentials' } });
+        return res.status(400).json({ status: 'error', error: 'Wrong credentials' });
       }
       if (bcrypt.compareSync(password, user.password)) {
         const { token } = await loginById(user.id);
@@ -35,7 +35,7 @@ export default {
         return res.status(200).send({ status: 'Success', data: user });
       }
     } catch (error) {
-      return res.status(500).json({ errors: 'There was a problem signing in' });
+      return res.status(500).json({ status: 'error', error: 'There was a problem signing in' });
     }
   },
 };

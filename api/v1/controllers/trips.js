@@ -33,7 +33,7 @@ export default {
   async getAllTrips(req, res) {
     const allTrips = await Trip.findAll({});
     if (!allTrips.length) {
-      return res.status(200).send({ data: [], message: 'No Trips yet' });
+      return res.status(200).send({ status: 'No Trips yet', data: [] });
     }
     return res.status(200).json({ status: 'Success', data: allTrips });
   },
@@ -51,12 +51,12 @@ export default {
   async updateTrip(req, res) {
     const { tripId } = req.params;
     if (tripId == null) {
-      res.status(400).send({ status: 'error', errors: 'A valid trip Id is required' });
+      res.status(400).send({ status: 'error', error: 'A valid trip Id is required' });
     }
 
     const trip = await Trip.findById(tripId);
     if (!trip.id) {
-      res.status(200).send({ status: 'error', errors: 'trip not found' });
+      res.status(200).send({ status: 'error', error: 'trip not found' });
     }
 
     trip.bus_id = req.body.bus_id;
@@ -67,7 +67,7 @@ export default {
     trip.status = req.body.status;
     const updatedTrip = await trip.update();
 
-    res.status(200).json({ data: updatedTrip, message: 'Trip updated successfully' });
+    res.status(200).json({ status: 'Trip updated successfully', data: updatedTrip, });
   },
 
   async deleteTrip(req, res) {
@@ -79,9 +79,9 @@ export default {
 
     try {
       await Trip.delete(tripId);
-      return res.status(200).json({ status: 'Trip deleted!', data: [] });
+      return res.status(200).json({ status: 'Trip deleted successfully', data: [] });
     } catch (error) {
       throw error;
     }
-  }
+  },
 };

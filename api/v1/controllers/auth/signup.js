@@ -13,7 +13,7 @@ const loginById = async (userId) => {
     email: user.email,
     is_admin: user.is_admin,
   };
-  const token = jwt.sign(loginUser, 'process.env.JWT_SECRET', '');
+  const token = jwt.sign(loginUser, process.env.JWT_SECRET, '');
   return token;
 };
 

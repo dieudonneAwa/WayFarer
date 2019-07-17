@@ -10,7 +10,7 @@ const createTokenById = async (bus) => {
     year: bus.year,
     capacity: bus.capacity,
   };
-  const token = jwt.sign(newBus, 'process.env.JWT_SECRET', '');
+  const token = jwt.sign(newBus, process.env.JWT_SECRET, '');
   newBus.token = token;
   return newBus;
 };

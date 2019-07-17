@@ -22,7 +22,7 @@ export default {
     try {
       const allTrips = await Trip.findAll();
       if (!allTrips.length) {
-        return res.status(200).send({ status: 'No Trips yet', data: [] });
+        return res.status(404).send({ status: 'No Trips yet', data: [] });
       }
       return res.status(200).json({ status: 'Success', data: allTrips });
     } catch (error) {

@@ -1,22 +1,10 @@
 import { config } from 'dotenv';
-import { Client } from 'pg';
+// import { Client } from 'pg';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import db from '../index';
 
 config();
-
-let connectionString = '';
-if (process.env.NODE_ENV === 'test') {
-  connectionString = process.env.TEST_DATABASE_URL;
-} else {
-  connectionString = process.env.DATABASE_URL;
-}
-
-const client = new Client({
-  connectionString,
-});
-client.connect();
 
 export const createToken = (user) => {
   const token = jwt.sign({

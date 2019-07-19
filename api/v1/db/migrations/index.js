@@ -3,21 +3,10 @@ import users from './users';
 import trips from './trips';
 import buses from './buses';
 import bookings from './bookings';
-
-let connectionString = '';
-
-if (process.env.NODE_ENV === 'test') {
-  connectionString = process.env.TEST_DATABASE_URL;
-} else {
-  connectionString = process.env.DATABASE_URL;
-}
-
-const pool = new Pool({
-  connectionString,
-});
+import db from '../index';
 
 const client = new Client({
-  connectionString,
+  connectionString: db.connectionString,
 });
 client.connect();
 

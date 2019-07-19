@@ -4,3 +4,4 @@ coverage/
 .env.example
 .vscode/
 lib/
+.env

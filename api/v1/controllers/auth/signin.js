@@ -14,10 +14,10 @@ export const loginById = async (userId) => {
     is_admin: user.is_admin,
     exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 30),
   };
-  const token = jwt.sign(loginUser, 'process.env.JWT_SECRET', '');
+  const token = jwt.sign(loginUser, process.env.JWT_SECRET, '');
   loginUser.token = token;
   return loginUser;
-}
+};
 
 export default {
   async login(req, res) {

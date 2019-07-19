@@ -21,7 +21,7 @@ export default {
     try {
       const allBookings = await Booking.adminFindAll();
       if (!allBookings.length) {
-        return res.status(200).send({ status: 'No bookings yet', data: [] });
+        return res.status(404).send({ status: 'No bookings yet', data: [] });
       }
       return res.status(200).json({ status: 'Success', data: allBookings });
     } catch (error) {

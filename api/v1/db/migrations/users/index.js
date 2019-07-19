@@ -21,7 +21,7 @@ export default {
 
   // Initialize users table
   initUsers: () => {
-    const params = ['Awa', 'Alexis', 'Alex', 'alex@example.com', false, '12345678'];
+    const params = ['Awa', 'Alexis', 'Alex', 'alex@example.com', true, '12345678'];
     const queryString = `INSERT INTO users (first_name, last_name, username, email, is_admin, password) 
                         VALUES 
                         ($1, $2, $3,$4, $5, $6) RETURNING *`;

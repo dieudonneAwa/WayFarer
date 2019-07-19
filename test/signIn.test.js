@@ -20,6 +20,9 @@ describe('Sign In', () => {
       .end((err, res) => {
         res.should.have.status(200);
         res.body.should.be.a('object');
+        res.body.should.have.property('data');
+        res.body.data.should.have.property('token');
+        res.body.should.have.property('status').eql('Success');
       }); done();
   });
 });

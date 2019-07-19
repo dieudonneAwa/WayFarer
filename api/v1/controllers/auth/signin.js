@@ -17,7 +17,7 @@ export const loginById = async (userId) => {
   const token = jwt.sign(loginUser, process.env.JWT_SECRET, '');
   loginUser.token = token;
   return loginUser;
-}
+};
 
 export default {
   async login(req, res) {

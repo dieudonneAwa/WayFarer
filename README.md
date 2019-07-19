@@ -115,7 +115,6 @@ bookings.
     "username": "Richman",
     "email": "johnrichman@example.com",
     "is_admin": false,
-    "password": "$2a$10$raHM.b1hGdLfN...",
     "token": "eyJhbGciOiJIUzI1NiI..."
   }
 }
